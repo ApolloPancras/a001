@@ -3,17 +3,18 @@ package p001;
 import java.util.Arrays;
 
 public class QuickSort {
-    private static int wCount =0;
-    private static int sCount =0;
+    private static int wCount = 0;
+    private static int sCount = 0;
+
     public static void main(String[] args) {
-        int[] arr = {9,-16,9,30,23,-30,-49,25,21,30};
+        int[] arr = { 9, -16, 9, 30, 23, -30, -49, 25, 21, 30 };
         // int[] arr = {5, 4, 3, 2, 1};
         // int[] arr = {5,1,5,2,5,3,5,4,5};
         // int[] arr = {9,-16,10,30,9,23,-30,-49,9,25,21,30};
         // System.out.print(Arrays.toString(arr));
         Sort(arr, 0, arr.length - 1);
         System.out.println(Arrays.toString(arr));
-        System.out.println("循环次数="+wCount+", 交换次数"+sCount);
+        System.out.println("循环次数=" + wCount + ", 交换次数" + sCount);
         System.out.println("======================================");
         // int[] arr2 = {9,-16,9,30,23,-30,-49,25,21,30};
         // int[] arr2 = {5, 4, 3, 2, 1};
@@ -44,10 +45,10 @@ public class QuickSort {
 
     private static void swap(int[] arr, int i, int j) {
         System.out.print(Arrays.toString(arr));
-        System.out.println("["+ i + "]=" + arr[i] + "swap[" + j + "]=" + arr[j]);
+        System.out.println("[" + i + "]=" + arr[i] + "swap[" + j + "]=" + arr[j]);
         if (i == j || arr[i] == arr[j]) {
-        //    System.out.println("---"+i+"---"+j);
-           return; 
+            // System.out.println("---"+i+"---"+j);
+            return;
         }
         sCount++;
         int temp = arr[i];
@@ -57,10 +58,10 @@ public class QuickSort {
 
     private static int partition(int[] arr, int start, int end) {
         // int pivotIndex = getMiddleIndex(arr, start, end);
-        int pivotIndex = (start+end)/2;
+        int pivotIndex = (start + end) / 2;
         int pivotValue = arr[pivotIndex];
         int left = start - 1;
-        int right = end + 1 ;
+        int right = end + 1;
         while (true) {
             wCount++;
             do {
@@ -76,43 +77,47 @@ public class QuickSort {
         }
     }
 
-    private static int getMiddleIndex(int[] arr, int start, int end) {
-        int middle = (start + (end - start) ) / 2;
-        if ((arr[start] < arr[middle] && arr[middle] < arr[end])||(arr[end] < arr[middle] && arr[middle] < arr[start])) {
+    static int getMiddleIndex(int[] arr, int start, int end) {
+        int middle = (start + (end - start)) / 2;
+        if ((arr[start] < arr[middle] && arr[middle] < arr[end])
+                || (arr[end] < arr[middle] && arr[middle] < arr[start])) {
             return middle;
-        } else if((arr[start] < arr[end] && arr[end] < arr[middle])||(arr[middle] < arr[end] && arr[end] < arr[start])){
+        } else if ((arr[start] < arr[end] && arr[end] < arr[middle])
+                || (arr[middle] < arr[end] && arr[end] < arr[start])) {
             return end;
-        }else{
+        } else {
             return start;
         }
     }
-    
+
     public static int partition2(int[] arr, int start, int end) {
-        int pivotIndex = (start + end)/2;
+        int pivotIndex = (start + end) / 2;
         int pivot = arr[pivotIndex];
         // swap(arr, pivotIndex, start);
         int left = start;
-        int right = end ;
+        int right = end;
         while (left < right) {
             wCount++;
             while (arr[left] < pivot) {
                 left++;
-            };
+            }
+            ;
             while (arr[right] > pivot) {
                 right--;
             }
-            if (left < right && left <end && right > start) {
-                if  (left != pivotIndex) {
+            if (left < right && left < end && right > start) {
+                if (left != pivotIndex) {
                     swap(arr, left, right);
                 }
                 left++;
                 right--;
             }
         }
-        if(left > right){
-            System.out.println("???????left="+left+"??????right="+right);
+        if (left > right) {
+            System.out.println("???????left=" + left + "??????right=" + right);
         }
-        System.out.println("arr["+pivotIndex+"]="+arr[pivotIndex]+"  pivotValue="+pivot +"  arr["+left+"]="+arr[left]+" arr["+right+"]="+arr[left]);
+        System.out.println("arr[" + pivotIndex + "]=" + arr[pivotIndex] + "  pivotValue=" + pivot + "  arr[" + left
+                + "]=" + arr[left] + " arr[" + right + "]=" + arr[left]);
         swap(arr, pivotIndex, left);
         return left;
     }
